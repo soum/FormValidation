@@ -15,7 +15,7 @@ Form.prototype.validateForm = function($form, options){
 
 Form.prototype.validateItem = function(obj){
 
-	return obj
+	return obj;
 }
 
 var form = new Form();
