@@ -1,16 +1,36 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>test doc</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script src="js/validation.js"></script>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/validation.js"></script>
+  
+
+  <style type="text/css">
+    .red {
+      border: 1px solid red;
+    }
+
+  </style>
+  
 </head>
 
 <body>
-	<form id="profile" name="profile">
-	  <label for="firstName">Male</label>
-	  <input type="text" name="firstname" id="firstName" maxlength="20" value=""/>
-	</form>
+  <form id="profile" name="profile">
+  <div>
+    <label for="firstName">first name</label>
+    <input type="text" name="firstname" id="firstName" maxlength="20" class="required" value="" />
+  </div>
+  <div>
+    <label for="lastName">last name</label>
+    <input type="text" name="lastName" id="lastName" maxlength="20" class="required" value="" />
+  </div>
+  <input type="submit" name="sumit" value="submit" />
+</form>
+
+  
 </body>
 
 </html>
+
