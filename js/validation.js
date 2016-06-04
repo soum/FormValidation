@@ -1,3 +1,4 @@
+window.onload=function(){
 var Form = function() {};
 
 Form.prototype.formValidate = function($form, options) {
@@ -56,3 +57,5 @@ var options = {
 }
 
 form.formValidate($('#profile'), options)
+
+}
