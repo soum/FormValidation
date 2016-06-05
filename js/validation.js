@@ -1,61 +1,76 @@
 window.onload=function(){
-var Form = function() {};
 
-Form.prototype.formValidate = function($form, options) {
+  var Form = function() {};
 
-  var self = this;
-  $form.on('submit', function(e) {
-    e.preventDefault();
-    self.isEmpty($form, options);
-  })
+  Form.prototype.formValidate = function($form, options) {
 
-}
+    var self = this;
+    $form.on('submit', function(e) {
+      e.preventDefault();
+      self.isEmpty($form, options);
+    })
 
-Form.prototype.isEmpty = function($form, options) {
-
-  var self = this;
-  $form.find(':input').each(function() {
-    if ($(this).hasClass('required') && $(this).val() === '') {
-      $(this).addClass('red');
-      self.errorMessage($(this), options);
-    } else {
-      self.removeErrorMessage($(this));
-    }
-  })
-  
-}
-
-Form.prototype.errorMessage = function(obj, options) {
-  var str = '';
-      $display = $(obj).parent().find('p'),
-      diff = options.message[0].missingError;
-  
-  if(!$display.length){
-    str = $('<p>' + diff + '</p>').insertAfter($(obj));
   }
-  return str;
-}
 
-Form.prototype.removeErrorMessage = function(obj){
-  $(obj).removeClass('red');
-}
+  Form.prototype.isEmpty = function($form, options) {
 
-var form = new Form();
+    var self = this;
+    $form.find(':input').each(function() {
+      if ($(this).hasClass('required') && $(this).val() === '') {
 
-var options = {
-  inputType: [
-    { 
-      type: "password",
-      maxlength: 8,
-      
+        self.errorMessage($(this), options);
+
+      } else {
+        self.removeErrorMessage($(this));
+      }
+    })
+    
+  }
+
+  Form.prototype.errorMessage = function(obj, options) {
+
+    var $display = $(obj).parent().find('p'),
+        diff = options.message[0].missingError;
+    
+    if(!$display.length){
+      $('<p>' + diff + '</p>').insertAfter($(obj));
+      this.removeErrorMessage(obj);
     }
-  ],
-  message: [{
-    missingError: "value is missing",
-    password: "invalid password"
-  }]
-}
 
-form.formValidate($('#profile'), options)
+  }
+
+  Form.prototype.removeErrorMessage = function(obj){
+
+    if($(obj).val() !== ''){
+      $(obj).removeClass('red');
+    }else{
+      $(obj).addClass('red');
+    }
+    
+    $(obj).on('keyup', function(){
+      if($(obj).val() !== ''){
+        $(obj).parent().find('p').remove();
+        $(obj).removeClass('red');
+      }
+    })
+  }
+
+  var form = new Form();
+
+  var options = {
+    inputType: [
+      { 
+        type: "password",
+        maxlength: 8,
+        
+      }
+    ],
+    message: [{
+      missingError: "value is missing",
+      password: "invalid password"
+    }]
+  }
+
+  form.formValidate($('#profile'), options)
 
 }
